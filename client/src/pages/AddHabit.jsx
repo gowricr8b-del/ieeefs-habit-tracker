@@ -14,7 +14,6 @@ export default function AddHabit() {
   const [selectedDays, setSelectedDays] = useState([]);
   const navigate = useNavigate();
 
-
   // Get days in a month
   const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
   const [selectedYear, selectedMonth] = startDate.split("-").map(Number);

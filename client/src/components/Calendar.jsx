@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import isHabitDue from "./../utils/utils"
+import {isHabitDue} from "../utils/utils"
 function Calendar({habits}) {
 
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -20,6 +20,8 @@ function Calendar({habits}) {
   const nextMonth = () => {
     setCurrentDate(new Date(year, month + 1, 1)); // error handling
   }
+
+
 
   return (
     <div className="bg-slate-900 text-slate-100 rounded-2xl p-3 sm:p-5 shadow-xl h-full flex flex-col min-h-0">
@@ -76,23 +78,25 @@ function Calendar({habits}) {
           const dayDate = new Date(year, month, day);
           const dueHabits = habits.filter(h => isHabitDue(h, dayDate));
           const completedHabits = dueHabits.filter(h => h.progress.includes(dayDate.toISOString().split("T")[0]));
-          const completion = dueHabits.length === 0 ? 0 : completedHabits.length / dueHabits.length;
+          const completion = dueHabits.length === 0 ? null : completedHabits.length / dueHabits.length;
 
           let bgColor = "";
-          if (completion === 0) bgColor = "";
+          if (completion === null) bgColor = ""
+          else if (completion === 0) bgColor = "#AA4A44";
           else if (completion > 0 && completion <= 0.25) bgColor = "#d6f5d6";
           else if (completion <= 0.75) bgColor = "#7cd67c";
           else if (completion > 0.75) bgColor = "#2eb82e";
-
+          
           return (
             <div
               key={index}
               className="aspect-square flex items-center justify-center rounded-full bg-slate-800 border border-slate-700 hover:border-sky-400/60 hover:bg-sky-900/30 transition-all duration-200 group relative cursor-pointer"
-              style={{ backgroundColor: bgColor }}
+              style={{backgroundColor: bgColor }}
             >
               <span className="text-slate-200">{day}</span>
               <div className="absolute bottom-full mb-1 sm:mb-2 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md text-[10px] sm:text-xs bg-slate-800 text-slate-200 shadow-lg opacity-0 group-hover:opacity-100 transition pointer-events-none">
-                {`🔥 ${completedHabits.length} / ${dueHabits.length} habits done`}
+                {completion === null ?
+                "No habits due" : `🔥 ${completedHabits.length} /${dueHabits.length} done!`}
               </div>
             </div>
           );

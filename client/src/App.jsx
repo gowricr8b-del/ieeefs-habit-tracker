@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import isHabitDue from './utils/utils';
+import Dashboard from './pages/Dashboard'
 
 function App() {
   
 
   return (
     <>
-      
+      <Dashboard/>
     </>
   )
 }

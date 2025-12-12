@@ -1,12 +1,12 @@
 import React from "react";
-import { useOutletContext } from "react-router-dom";
+import { markHabitComplete } from "../utils/utils";
 
 function HabitList({ habits, setHabits }) {
-  const { markHabitComplete } = useOutletContext();
   const handleCheckbox = (habitId) => {
     const today = new Date();
     markHabitComplete(habitId, today);
   }
+  
   return (
     <div className="bg-slate-900 text-slate-100 rounded-2xl p-3 sm:p-5 shadow-xl h-full flex flex-col min-h-0">
       <h2 className="text-lg sm:text-xl font-semibold text-sky-300 mb-3 sm:mb-4 shrink-0">Your Habits</h2>
@@ -37,4 +37,5 @@ function HabitList({ habits, setHabits }) {
     </div>
   );
 }
+
 export default HabitList
