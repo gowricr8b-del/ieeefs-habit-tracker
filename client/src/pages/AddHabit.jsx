@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import  {toast} from 'react-toastify';
@@ -6,7 +5,7 @@ import { useOutletContext } from "react-router-dom";
 
 export default function AddHabit() {
 
-  const { habits, setHabits } = useOutletContext();
+  const { setHabits } = useOutletContext();
   const [habitName, setHabitName] = useState("");
   const [startDate, setStartDate] = useState(new Date().toISOString().split("T")[0]);
   const [frequency, setFrequency] = useState("Daily");
